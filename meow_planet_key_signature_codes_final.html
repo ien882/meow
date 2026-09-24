@@ -127,7 +127,7 @@
         <label for="player-name-input" id="lbl-enter-name" class="text-xs font-bold text-amber-900 flex items-center gap-1">
           🐱 請輸入音樂家的名字 (Player Name)：
         </label>
-        <input id="player-name-input" type="text" maxlength="12" placeholder="例如：莫札特小喵" class="w-full px-4 py-2.5 rounded-xl border-2 border-amber-300 focus:border-amber-500 focus:outline-none font-bold text-slate-700 bg-white shadow-inner text-sm">
+        <input id="player-name-input" type="text" maxlength="12" placeholder="例如：莫扎特小喵" class="w-full px-4 py-2.5 rounded-xl border-2 border-amber-300 focus:border-amber-500 focus:outline-none font-bold text-slate-700 bg-white shadow-inner text-sm">
       </div>
 
       <button onclick="startGameWithPlayerName()" class="btn-macaron bg-amber-400 hover:bg-amber-500 text-amber-950 font-black py-3 px-8 rounded-2xl text-base w-full shadow-lg border-2 border-amber-500 flex items-center justify-center gap-2">
@@ -422,9 +422,9 @@
         equipped: '使用中',
         equip: '換上',
         unlock: '解鎖',
-        promptMode1: '請觀察五線譜上的調號，選出正確對應的調性名稱！',
+        promptMode1: '請觀察五線譜上的調號，選出正確對應的調性名稱。',
         promptMode2: '這個貓咪家族擁有哪一些升降號音名？',
-        promptMode3: '請幫貓爸爸找出相對應的關係小調（minor）！',
+        promptMode3: '請幫貓爸爸Major找出相對應的關係小調minor。',
         pianoToggle: '開啟 / 隱藏「鋼琴琴鍵半音輔助尺」',
         pianoHint: '💡 提示：點擊琴鍵可發出精確鋼琴音高並計算半音數量 (關係小調 = 大調向下 3 個半音 / 4 個琴鍵步驟)'
       },
@@ -829,7 +829,7 @@
 
       const modePrompts = {
         1: state.lang === 'zh' 
-          ? `請觀察五線譜上的調號，請問這是哪一個【${targetKey.type === 'major' ? '大調 Major' : '小調 Minor'}】？` 
+          ? `請觀察五線譜上的調號，請問這是哪一個 ${targetKey.type === 'major' ? '大調 Major' : '小調 Minor'} ？` 
           : `Which ${targetKey.type === 'major' ? 'Major' : 'Minor'} key corresponds to this key signature?`,
         2: I18N[state.lang].promptMode2,
         3: I18N[state.lang].promptMode3
@@ -849,7 +849,7 @@
         presentationBox.classList.add('hidden');
         textQContainer.classList.remove('hidden');
         setTxt('text-question-title', targetKey.name);
-        setTxt('text-question-sub', state.lang === 'zh' ? '請找出擁有正確升降號的答案' : 'Choose the correct key signature');
+        setTxt('text-question-sub', state.lang === 'zh' ? '請找出正確的升降號。' : 'Choose the correct key signature');
       } else if (state.mode === 3) {
         // Mode 3: Relative Major <-> Relative Minor
         presentationBox.classList.add('hidden');
@@ -860,10 +860,10 @@
         const isAskingMinor = targetKey.type === 'major';
         if (isAskingMinor) {
           setTxt('text-question-sub', state.lang === 'zh' ? '請找出相對應的關係小調 (Relative Minor)' : 'Find the corresponding Relative Minor');
-          setTxt('examiner-speech', state.lang === 'zh' ? '請幫忙貓爸爸Major找小孩。' : 'Find the Relative Minor for this Major key!');
+          setTxt('examiner-speech', state.lang === 'zh' ? '請幫忙貓爸爸Major找小貓minor。' : 'Find the Relative Minor for this Major key!');
         } else {
           setTxt('text-question-sub', state.lang === 'zh' ? '請找出相對應的關係大調 (Relative Major)' : 'Find the corresponding Relative Major');
-          setTxt('examiner-speech', state.lang === 'zh' ? '請幫忙小貓Minor找爸爸。' : 'Find the Relative Major for this Minor key.');
+          setTxt('examiner-speech', state.lang === 'zh' ? '請幫忙小貓Minor找貓爸爸Major。' : 'Find the Relative Major for this Minor key.');
         }
       }
 
