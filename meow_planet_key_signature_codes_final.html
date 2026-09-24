@@ -1,0 +1,1237 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>喵星球之調號大解密 Meow Planet: The Key Signature Codes</title>
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600;700&family=Noto+Sans+TC:wght@400;600;800&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-cream: #FFF9E6;
+      --pastel-blue: #E1F5FE;
+      --pastel-mint: #E8F5E9;
+      --text-dark: #37474F;
+    }
+
+    body {
+      font-family: 'Fredoka', 'Noto Sans TC', sans-serif;
+      background-color: var(--bg-cream);
+      background-image: 
+        radial-gradient(#FFE082 1.5px, transparent 1.5px),
+        radial-gradient(#B2EBF2 1.5px, #FFF9E6 1.5px);
+      background-size: 60px 60px;
+      background-position: 0 0, 30px 30px;
+      color: var(--text-dark);
+      user-select: none;
+      -webkit-user-select: none;
+      min-height: 100vh;
+    }
+
+    .macaron-card {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border: 3px solid #FFF;
+      box-shadow: 0 10px 25px -5px rgba(230, 190, 150, 0.3), 0 8px 10px -6px rgba(200, 180, 150, 0.2);
+    }
+
+    .btn-macaron {
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .btn-macaron:hover {
+      transform: translateY(-3px) scale(1.02);
+    }
+    .btn-macaron:active {
+      transform: translateY(2px) scale(0.97);
+    }
+
+    /* Key Staff Custom Styles */
+    .staff-line {
+      stroke: #607D8B;
+      stroke-width: 2;
+    }
+
+    /* Key Animation Frames */
+    @keyframes bounce-gentle {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+    .animate-bounce-gentle {
+      animation: bounce-gentle 2.5s infinite ease-in-out;
+    }
+
+    @keyframes pop-success {
+      0% { transform: scale(0.8); opacity: 0; }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    .animate-pop {
+      animation: pop-success 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+    }
+
+    /* Piano Key Custom Press Effects */
+    .piano-key-white {
+      background: linear-gradient(to bottom, #FFFFFF 0%, #F5F5F5 85%, #E0E0E0 100%);
+      transition: transform 0.08s ease, background-color 0.08s ease;
+      cursor: pointer;
+    }
+    .piano-key-white:active, .piano-key-white.active {
+      background: linear-gradient(to bottom, #FFE082 0%, #FFD54F 100%) !important;
+      transform: translateY(3px);
+    }
+
+    .piano-key-black {
+      background: linear-gradient(to bottom, #37474F 0%, #212121 80%, #000000 100%);
+      transition: transform 0.08s ease, background-color 0.08s ease;
+      cursor: pointer;
+    }
+    .piano-key-black:active, .piano-key-black.active {
+      background: linear-gradient(to bottom, #FFA726 0%, #FB8C00 100%) !important;
+      transform: translateY(3px);
+    }
+
+    /* Scrollbar Styling */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: var(--bg-cream);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #FFE082;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body class="flex flex-col justify-between min-h-screen p-2 sm:p-4">
+
+  <!-- Welcome Screen Overlay -->
+  <div id="welcome-screen" class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-50 flex items-center justify-center p-4">
+    <div class="macaron-card rounded-3xl max-w-md w-full p-6 sm:p-8 text-center flex flex-col items-center gap-5 shadow-2xl animate-pop border-4 border-amber-200">
+      <img src="Mozart cat.png" onerror="this.onerror=null; this.src='https://placehold.co/120x120/ffe082/4a4238?text=Mozart+Cat'" class="w-24 h-24 rounded-3xl border-4 border-amber-300 shadow-md object-cover bg-amber-50 animate-bounce-gentle">
+      
+      <div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-amber-950 tracking-wide">喵星球之調號大解密</h2>
+        <p class="text-xs sm:text-sm text-amber-700 font-semibold mt-1">Meow Planet: Key Signature Codes</p>
+        <p class="text-xs sm:text-sm text-amber-900 font-bold mt-2.5 bg-amber-100/70 py-2.5 px-3.5 rounded-xl border border-amber-200/80 shadow-inner">
+          喵！歡迎來到喵星球，請幫我解開這個調號密碼吧！
+        </p>
+      </div>
+
+      <div class="w-full text-left bg-amber-50/80 p-4 rounded-2xl border border-amber-200 flex flex-col gap-2">
+        <label for="player-name-input" id="lbl-enter-name" class="text-xs font-bold text-amber-900 flex items-center gap-1">
+          🐱 請輸入音樂家的名字 (Player Name)：
+        </label>
+        <input id="player-name-input" type="text" maxlength="12" placeholder="例如：莫札特小喵" class="w-full px-4 py-2.5 rounded-xl border-2 border-amber-300 focus:border-amber-500 focus:outline-none font-bold text-slate-700 bg-white shadow-inner text-sm">
+      </div>
+
+      <button onclick="startGameWithPlayerName()" class="btn-macaron bg-amber-400 hover:bg-amber-500 text-amber-950 font-black py-3 px-8 rounded-2xl text-base w-full shadow-lg border-2 border-amber-500 flex items-center justify-center gap-2">
+        🚀 <span id="btn-start-txt">開始喵喵冒險</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Top Navigation Header -->
+  <header class="max-w-4xl mx-auto w-full mb-3">
+    <div class="macaron-card rounded-3xl p-3 sm:p-4 flex flex-wrap items-center justify-between gap-2 border-2 border-amber-100">
+      
+      <!-- Brand & Title -->
+      <div class="flex items-center gap-2">
+        <img id="header-avatar" src="Mozart cat.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffe082/4a4238?text=Mozart+Cat'" alt="App Logo" class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl border-2 border-amber-300 object-cover shadow-sm">
+        <div>
+          <div class="flex items-center gap-2">
+            <h1 class="font-bold text-base sm:text-xl text-amber-900 tracking-wide flex items-center gap-1">
+              <span id="ui-title">喵星球之調號大解密</span>
+            </h1>
+            <span id="display-player-name" class="text-xs bg-amber-200/80 text-amber-950 px-2.5 py-0.5 rounded-full font-extrabold border border-amber-300">小喵樂手</span>
+          </div>
+          <p class="text-xs text-amber-700/70 font-semibold" id="ui-subtitle">Meow Planet: Key Signature Codes</p>
+        </div>
+      </div>
+
+      <!-- Controls & Inventories -->
+      <div class="flex items-center gap-2 sm:gap-3 ml-auto">
+        
+        <!-- Language Switcher -->
+        <button id="btn-lang" onclick="toggleLanguage()" class="btn-macaron bg-white hover:bg-sky-50 text-sky-700 font-bold px-3 py-1.5 rounded-2xl text-xs sm:text-sm border-2 border-sky-200 flex items-center gap-1 shadow-sm">
+          🌐 <span id="txt-lang-btn">EN</span>
+        </button>
+
+        <!-- Currency Display -->
+        <div class="flex items-center gap-2 bg-amber-50/80 px-3 py-1.5 rounded-2xl border border-amber-200 text-xs sm:text-sm font-bold">
+          <span title="Fish Treats" class="flex items-center gap-1 text-amber-800">🐟 <span id="count-fish">0</span></span>
+          <span class="text-amber-300">|</span>
+          <span title="Golden Cans" class="flex items-center gap-1 text-amber-800">🥫 <span id="count-cans">0</span></span>
+        </div>
+
+        <!-- Gallery Button -->
+        <button onclick="openGallery()" class="btn-macaron bg-pink-100 hover:bg-pink-200 text-pink-800 font-bold px-3 py-1.5 rounded-2xl text-xs sm:text-sm border border-pink-300 flex items-center gap-1 shadow-sm">
+          📖 <span id="ui-gallery-btn">圖鑑</span>
+        </button>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- Main Game Container -->
+  <main class="max-w-4xl mx-auto w-full flex-grow flex flex-col justify-start gap-4">
+
+    <!-- Grade & Mode Selection Bar -->
+    <section class="macaron-card rounded-3xl p-3 sm:p-4 text-center">
+      
+      <!-- Grade Level Selector -->
+      <div class="flex items-center justify-between flex-wrap gap-2 mb-3">
+        <span id="ui-select-grade" class="text-xs sm:text-sm font-bold text-amber-900 flex items-center gap-1">
+          🎓 ABRSM 考級階段：
+        </span>
+        <div class="flex items-center gap-1 sm:gap-2 overflow-x-auto py-1 max-w-full" id="grade-buttons-container">
+          <!-- Grade buttons rendered dynamically -->
+        </div>
+      </div>
+
+      <!-- Mode Selector Tabs -->
+      <div class="grid grid-cols-3 gap-1.5 sm:gap-3 bg-amber-50/60 p-1.5 rounded-2xl border border-amber-200/60">
+        <button id="btn-mode-1" onclick="changeMode(1)" class="btn-macaron py-2 px-2 sm:px-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-amber-900 bg-white shadow-sm border border-amber-200">
+          🔍 <span id="ui-mode1">調號找調性</span>
+        </button>
+        <button id="btn-mode-2" onclick="changeMode(2)" class="btn-macaron py-2 px-2 sm:px-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-amber-800 hover:bg-white/60">
+          🎼 <span id="ui-mode2">調性找調號</span>
+        </button>
+        <button id="btn-mode-3" onclick="changeMode(3)" class="btn-macaron py-2 px-2 sm:px-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-amber-800 hover:bg-white/60">
+          🐱 <span id="ui-mode3">關係大小調</span>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- Game Question Dashboard -->
+    <section id="game-dashboard" class="macaron-card rounded-3xl p-4 sm:p-6 flex flex-col gap-4 relative overflow-hidden">
+      
+      <!-- Progress Bar & Score -->
+      <div class="flex items-center justify-between text-xs sm:text-sm font-bold text-slate-600">
+        <div class="flex items-center gap-2">
+          <span class="bg-amber-100 text-amber-900 px-3 py-1 rounded-full border border-amber-200" id="lbl-question-count">
+            題目 1 / 10
+          </span>
+          <span id="lbl-clef-info" class="bg-blue-50 text-blue-800 px-2.5 py-1 rounded-full text-xs font-semibold">
+            Treble Clef
+          </span>
+        </div>
+        <div class="flex items-center gap-1 text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+          ⭐ <span id="lbl-score">得分: 0</span>
+        </div>
+      </div>
+
+      <!-- Character Examiner & Speech Bubble -->
+      <div class="flex items-start gap-3 bg-gradient-to-r from-amber-50/80 to-sky-50/80 p-3 sm:p-4 rounded-2xl border border-amber-100">
+        <!-- Cat Avatar Graphic -->
+        <div id="examiner-avatar-box" class="w-16 h-16 sm:w-20 sm:h-20 flex-shrink-0 animate-bounce-gentle">
+          <img id="question-cat-avatar" src="baby cat.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffe082/4a4238?text=Minor+Kitty'" class="w-full h-full rounded-2xl object-cover border-2 border-amber-300 shadow-sm">
+        </div>
+        <!-- Speech Bubble -->
+        <div class="flex-grow bg-white p-3 sm:p-4 rounded-2xl shadow-sm border border-slate-100 relative text-xs sm:text-base font-semibold text-slate-700 leading-relaxed flex flex-col justify-center min-h-[64px]">
+          <p id="examiner-speech">喵！歡迎來到喵星球樂理課，請幫我解開這個調號密碼吧！</p>
+        </div>
+      </div>
+
+      <!-- Staff SVG Presentation Container -->
+      <div id="presentation-box" class="bg-white rounded-2xl p-4 border-2 border-slate-100 shadow-inner flex flex-col items-center justify-center min-h-[180px] relative">
+        <div id="staff-container" class="w-full flex justify-center items-center overflow-x-auto">
+          <svg id="staff-svg" width="340" height="140" viewBox="0 0 340 140" class="max-w-md w-full h-auto">
+            <!-- Rendered via JS -->
+          </svg>
+        </div>
+        <div id="text-question-container" class="hidden text-center my-2">
+          <h2 id="text-question-title" class="text-3xl sm:text-4xl font-extrabold text-amber-900">D Major</h2>
+          <p id="text-question-sub" class="text-xs sm:text-sm text-amber-700 mt-1">尋找對應的調號音名</p>
+        </div>
+      </div>
+
+      <!-- Options Grid -->
+      <div id="options-grid" class="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-1">
+        <!-- Rendered in JS -->
+      </div>
+
+      <!-- Piano Keyboard Helper Drawer Toggle -->
+      <div class="border-t border-slate-100 pt-3">
+        <button onclick="togglePianoDrawer()" class="w-full py-2.5 bg-amber-100/60 hover:bg-amber-100 text-amber-900 font-bold text-xs sm:text-sm rounded-xl flex items-center justify-center gap-2 border border-amber-200 transition-colors shadow-sm">
+          🎹 <span id="txt-piano-toggle">開啟 / 隱藏「鋼琴琴鍵半音輔助尺」</span> 
+          <span id="piano-drawer-arrow" class="text-xs">▼</span>
+        </button>
+
+        <!-- Collapsible Piano Drawer -->
+        <div id="piano-drawer" class="hidden mt-3 p-3 sm:p-4 bg-gradient-to-b from-amber-50 to-orange-50/40 rounded-2xl border-2 border-amber-200 flex flex-col items-center shadow-inner">
+          <div class="text-xs sm:text-sm text-amber-900 font-semibold mb-3 text-center" id="txt-piano-hint">
+            💡 提示：點擊琴鍵可發出精確鋼琴音高並計算半音數量 (關係小調 = 大調向下 3 個半音 / 4 個琴鍵步驟)
+          </div>
+
+          <!-- Interactive Piano Keyboard Element -->
+          <div id="piano-keyboard-container" class="w-full overflow-x-auto flex justify-center py-2 min-h-[120px]">
+            <!-- Rendered dynamically via JS without text/note labels -->
+          </div>
+
+          <!-- Piano Distance Tracker -->
+          <div id="piano-info-bar" class="mt-3 text-xs font-bold text-slate-700 bg-white/90 px-4 py-1.5 rounded-xl border border-amber-200 min-h-[30px] flex items-center justify-center gap-2 shadow-sm">
+            <span>點擊狀態：<span id="piano-selected-keys" class="text-amber-800">按壓琴鍵即可聆聽真實鋼琴音高</span></span>
+          </div>
+        </div>
+      </div>
+
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="max-w-4xl mx-auto w-full text-center py-3 text-xs text-amber-900/60 font-semibold">
+    <p>《喵星球之調號大解密》 © RE MusicHouse | ABRSM Grade 1-5 樂理復習</p>
+  </footer>
+
+  <!-- Gallery Modal -->
+  <div id="modal-gallery" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+    <div class="macaron-card rounded-3xl max-w-lg w-full p-4 sm:p-6 max-h-[90vh] flex flex-col justify-between animate-pop">
+      <div class="flex items-center justify-between border-b border-slate-100 pb-3 mb-3">
+        <h3 id="gallery-title" class="text-lg sm:text-xl font-bold text-amber-900 flex items-center gap-2">
+          📖 貓咪圖鑑
+        </h3>
+        <button onclick="closeGallery()" class="w-8 h-8 rounded-full bg-slate-100 text-slate-500 hover:bg-slate-200 font-bold flex items-center justify-center">✕</button>
+      </div>
+
+      <div id="gallery-grid" class="grid grid-cols-2 sm:grid-cols-3 gap-3 overflow-y-auto p-1 max-h-[60vh]">
+        <!-- Rendered in JS -->
+      </div>
+
+      <div class="mt-4 pt-3 border-t border-slate-100 text-right">
+        <button id="btn-close-gallery" onclick="closeGallery()" class="bg-amber-400 hover:bg-amber-500 text-amber-950 font-bold px-5 py-2 rounded-2xl text-sm transition-colors shadow-md">
+          關閉
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Summary Modal -->
+  <div id="modal-summary" class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+    <div class="macaron-card rounded-3xl max-w-md w-full p-6 text-center flex flex-col items-center gap-4 animate-pop">
+      <img id="summary-cat-avatar" src="baby cat.png" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffe082/4a4238?text=Cat'" class="w-20 h-20 rounded-full border-4 border-amber-300 shadow-lg object-cover bg-white -mt-10">
+      <h3 id="summary-title" class="text-2xl font-bold text-amber-950">闖關完成！</h3>
+      <p class="text-sm font-medium text-slate-600" id="summary-msg">你做得太棒了！樂理小達人非你莫屬！</p>
+      
+      <div class="bg-amber-50 rounded-2xl p-4 w-full flex justify-around text-center border border-amber-200">
+        <div>
+         <div class="text-xs text-amber-800 font-bold">答對題數</div>
+         <div id="summary-score" class="text-2xl font-black text-amber-900">10 / 10</div>
+        </div>
+        <div class="border-r border-amber-200"></div>
+        <div>
+          <div class="text-xs text-amber-800 font-bold">獲得獎勵</div>
+          <div id="summary-rewards" class="text-lg font-bold text-amber-900 flex items-center gap-1 justify-center">
+            🐟 +10 🥫 +1
+          </div>
+        </div>
+      </div>
+
+      <button onclick="restartGameRound()" class="btn-macaron bg-emerald-400 hover:bg-emerald-500 text-emerald-950 font-bold px-6 py-3 rounded-2xl text-base w-full shadow-lg">
+        🔄 再玩一次
+      </button>
+    </div>
+  </div>
+
+  <script>
+    /* Safe helper to set textContent without null errors */
+    function setTxt(id, text) {
+      const el = document.getElementById(id);
+      if (el) el.textContent = text;
+    }
+
+    /* ==========================================================================
+       1. GAME STATE & MULTILINGUAL DICTIONARY & KEY SIGNATURE DATABASE
+       ========================================================================== */
+    const KEY_DATABASE = [
+      // Grade 1
+      { name: 'C Major', grade: 1, type: 'major', sigType: 'sharps', keySigCount: 0, notes: '無升降號', relative: 'A minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'G Major', grade: 1, type: 'major', sigType: 'sharps', keySigCount: 1, notes: 'F♯', relative: 'E minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'D Major', grade: 1, type: 'major', sigType: 'sharps', keySigCount: 2, notes: 'F♯, C♯', relative: 'B minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'F Major', grade: 1, type: 'major', sigType: 'flats', keySigCount: 1, notes: 'B♭', relative: 'D minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'A minor', grade: 1, type: 'minor', sigType: 'sharps', keySigCount: 0, notes: '無升降號', relative: 'C Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'E minor', grade: 1, type: 'minor', sigType: 'sharps', keySigCount: 1, notes: 'F♯', relative: 'G Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'D minor', grade: 1, type: 'minor', sigType: 'flats', keySigCount: 1, notes: 'B♭', relative: 'F Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'B minor', grade: 1, type: 'minor', sigType: 'sharps', keySigCount: 2, notes: 'F♯, C♯', relative: 'D Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+
+      // Grade 2
+      { name: 'A Major', grade: 2, type: 'major', sigType: 'sharps', keySigCount: 3, notes: 'F♯, C♯, G♯', relative: 'F♯ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'B♭ Major', grade: 2, type: 'major', sigType: 'flats', keySigCount: 2, notes: 'B♭, E♭', relative: 'G minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'E♭ Major', grade: 2, type: 'major', sigType: 'flats', keySigCount: 3, notes: 'B♭, E♭, A♭', relative: 'C minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'F♯ minor', grade: 2, type: 'minor', sigType: 'sharps', keySigCount: 3, notes: 'F♯, C♯, G♯', relative: 'A Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'G minor', grade: 2, type: 'minor', sigType: 'flats', keySigCount: 2, notes: 'B♭, E♭', relative: 'B♭ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'C minor', grade: 2, type: 'minor', sigType: 'flats', keySigCount: 3, notes: 'B♭, E♭, A♭', relative: 'E♭ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+
+      // Grade 3
+      { name: 'E Major', grade: 3, type: 'major', sigType: 'sharps', keySigCount: 4, notes: 'F♯, C♯, G♯, D♯', relative: 'C♯ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'A♭ Major', grade: 3, type: 'major', sigType: 'flats', keySigCount: 4, notes: 'B♭, E♭, A♭, D♭', relative: 'F minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'C♯ minor', grade: 3, type: 'minor', sigType: 'sharps', keySigCount: 4, notes: 'F♯, C♯, G♯, D♯', relative: 'E Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'F minor', grade: 3, type: 'minor', sigType: 'flats', keySigCount: 4, notes: 'B♭, E♭, A♭, D♭', relative: 'A♭ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+
+      // Grade 4
+      { name: 'B Major', grade: 4, type: 'major', sigType: 'sharps', keySigCount: 5, notes: 'F♯, C♯, G♯, D♯, A♯', relative: 'G♯ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'D♭ Major', grade: 4, type: 'major', sigType: 'flats', keySigCount: 5, notes: 'B♭, E♭, A♭, D♭, G♭', relative: 'B♭ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'G♯ minor', grade: 4, type: 'minor', sigType: 'sharps', keySigCount: 5, notes: 'F♯, C♯, G♯, D♯, A♯', relative: 'B Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'B♭ minor', grade: 4, type: 'minor', sigType: 'flats', keySigCount: 5, notes: 'B♭, E♭, A♭, D♭, G♭', relative: 'D♭ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+
+      // Grade 5
+      { name: 'F♯ Major', grade: 5, type: 'major', sigType: 'sharps', keySigCount: 6, notes: 'F♯, C♯, G♯, D♯, A♯, E♯', relative: 'D♯ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'C♯ Major', grade: 5, type: 'major', sigType: 'sharps', keySigCount: 7, notes: 'F♯, C♯, G♯, D♯, A♯, E♯, B♯', relative: 'A♯ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'G♭ Major', grade: 5, type: 'major', sigType: 'flats', keySigCount: 6, notes: 'B♭, E♭, A♭, D♭, G♭, C♭', relative: 'E♭ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'C♭ Major', grade: 5, type: 'major', sigType: 'flats', keySigCount: 7, notes: 'B♭, E♭, A♭, D♭, G♭, C♭, F♭', relative: 'A♭ minor', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'D♯ minor', grade: 5, type: 'minor', sigType: 'sharps', keySigCount: 6, notes: 'F♯, C♯, G♯, D♯, A♯, E♯', relative: 'F♯ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'A♯ minor', grade: 5, type: 'minor', sigType: 'sharps', keySigCount: 7, notes: 'F♯, C♯, G♯, D♯, A♯, E♯, B♯', relative: 'C♯ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'E♭ minor', grade: 5, type: 'minor', sigType: 'flats', keySigCount: 6, notes: 'B♭, E♭, A♭, D♭, G♭, C♭', relative: 'G♭ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] },
+      { name: 'A♭ minor', grade: 5, type: 'minor', sigType: 'flats', keySigCount: 7, notes: 'B♭, E♭, A♭, D♭, G♭, C♭, F♭', relative: 'C♭ Major', clefs: ['treble', 'bass', 'alto', 'tenor'] }
+    ];
+
+    const state = {
+      playerName: '小喵樂手',
+      lang: 'zh',
+      grade: 1,
+      mode: 1,
+      questionIndex: 0,
+      maxQuestions: 10,
+      score: 0,
+      fish: 0,
+      cans: 0,
+      currentQuestion: null,
+      selectedClef: 'treble',
+      equippedCat: 'kitty',
+      unlockedCats: ['kitty']
+    };
+
+    const I18N = {
+      zh: {
+        title: '喵星球之調號大解密',
+        subtitle: 'Meow Planet: The Key Signature Codes',
+        selectGrade: '🎓 ABRSM 考級階段：',
+        mode1: '調號找調性',
+        mode2: '調性找調號',
+        mode3: '關係大小調',
+        galleryBtn: '圖鑑',
+        galleryTitle: '📖 貓咪圖鑑',
+        closeBtn: '關閉',
+        equipped: '使用中',
+        equip: '換上',
+        unlock: '解鎖',
+        promptMode1: '請觀察五線譜上的調號，選出正確對應的調性名稱！',
+        promptMode2: '這個貓咪家族擁有哪一些升降號音名？',
+        promptMode3: '請幫貓爸爸找出相對應的關係小調（minor）！',
+        pianoToggle: '開啟 / 隱藏「鋼琴琴鍵半音輔助尺」',
+        pianoHint: '💡 提示：點擊琴鍵可發出精確鋼琴音高並計算半音數量 (關係小調 = 大調向下 3 個半音 / 4 個琴鍵步驟)'
+      },
+      en: {
+        title: 'Meow Planet: Key Signatures',
+        subtitle: 'Key Signature Revision Game',
+        selectGrade: '🎓 ABRSM Level:',
+        mode1: 'Identify the Key',
+        mode2: 'Find the Key Signature',
+        mode3: 'Relative Major/Minor',
+        galleryBtn: 'Gallery',
+        galleryTitle: '📖 Cat Gallery',
+        closeBtn: 'Close',
+        equipped: 'Equipped',
+        equip: 'Equip',
+        unlock: 'Unlock',
+        promptMode1: 'Observe the key signature on the staff and identify the correct key name:',
+        promptMode2: 'Which list of accidentals belongs to this key?',
+        promptMode3: 'Find the Relative Major/Minor for this key:',
+        pianoToggle: 'Show / Hide Piano Semitone Ruler',
+        pianoHint: '💡 Hint: Tap keys to hear acoustic piano pitches & calculate semitones (Relative Minor = Major minus 3 semitones)'
+      }
+    };
+
+    const GALLERY_CATS = [
+      { id: "baby", name: "小調小貓咪", nameEn: "Minor Kitty", costFish: 0, costCans: 0, img: "minor kitty.svg" },
+      { id: "dad", name: "大調貓爸爸", nameEn: "Major daddy Cat", costFish: 10, costCans: 1, img: "major daddy cat.svg" },
+      { id: "teacher", name: "音樂老師貓", nameEn: "Teacher Cat", costFish: 15, costCans: 2, img: "teacher cat.svg" },
+      { id: "bach", name: "巴哈貓", nameEn: "Bach Cat", costFish: 20, costCans: 3, img: "bach cat.svg" },
+      { id: "beethoven", name: "貝多芬貓", nameEn: "Beethoven Cat", costFish: 25, costCans: 4, img: "beethoven cat.svg" },
+      { id: "mozart", name: "莫扎特貓", nameEn: "Mozart Cat", costFish: 30, costCans: 5, img: "Mozart cat.svg" }
+    ];
+
+    /* ==========================================================================
+       2. REALISTIC ACOUSTIC PIANO SYNTHESIZER (Web Audio API)
+       ========================================================================== */
+    let audioCtx = null;
+
+    function getAudioContext() {
+      if (!audioCtx) {
+        audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      }
+      if (audioCtx.state === 'suspended') {
+        audioCtx.resume();
+      }
+      return audioCtx;
+    }
+
+    /* Acoustic Piano Pitch Audio Generator */
+    function playPianoPitch(freq) {
+      try {
+        const ctx = getAudioContext();
+        const now = ctx.currentTime;
+
+        // Primary piano string oscillator (Warm triangle fundamental)
+        const osc1 = ctx.createOscillator();
+        osc1.type = 'triangle';
+        osc1.frequency.setValueAtTime(freq, now);
+
+        // Harmonic string oscillator (Octave sine brightness)
+        const osc2 = ctx.createOscillator();
+        osc2.type = 'sine';
+        osc2.frequency.setValueAtTime(freq * 2, now);
+
+        // Envelope Gain Nodes
+        const mainGain = ctx.createGain();
+        mainGain.gain.setValueAtTime(0.5, now);
+        mainGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.2);
+
+        const subGain = ctx.createGain();
+        subGain.gain.setValueAtTime(0.18, now);
+        subGain.gain.exponentialRampToValueAtTime(0.0001, now + 0.8);
+
+        // Lowpass Filter for soft piano wooden damper resonance
+        const filter = ctx.createBiquadFilter();
+        filter.type = 'lowpass';
+        filter.frequency.setValueAtTime(freq * 3.5, now);
+        filter.frequency.exponentialRampToValueAtTime(freq * 1.2, now + 0.8);
+
+        osc1.connect(mainGain);
+        osc2.connect(subGain);
+        subGain.connect(mainGain);
+        mainGain.connect(filter);
+        filter.connect(ctx.destination);
+
+        osc1.start(now);
+        osc2.start(now);
+        osc1.stop(now + 1.25);
+        osc2.stop(now + 1.25);
+      } catch (e) {
+        console.warn("Audio playback error:", e);
+      }
+    }
+
+    /* Sound Effect for Answers */
+    function playSound(type) {
+      if (type === 'correct') {
+        const freqs = [261.63, 329.63, 392.00, 523.25];
+        freqs.forEach((freq, idx) => {
+          setTimeout(() => playPianoPitch(freq), idx * 80);
+        });
+      } else if (type === 'wrong') {
+        const ctx = getAudioContext();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'triangle';
+        osc.frequency.setValueAtTime(150, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(80, ctx.currentTime + 0.22);
+        gain.gain.setValueAtTime(0.2, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, ctx.currentTime + 0.22);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + 0.22);
+      }
+    }
+
+    /* ==========================================================================
+       3. VECTOR CLEFS & STAFF RENDERING
+       ========================================================================== */
+    function getClefSVGVector(clef) {
+      switch (clef) {
+        case 'treble':
+          return `
+            <g transform="translate(44, 26) scale(0.63)">
+              <path d="M 0 0 C 3.69 1.34 5.37 3.2 7.31 6.5 C 10.35 13.27 9.91 20.24 7.44 27.12 C 5.44 31.62 2.72 35.31 -0.41 39.09 C -2.15 41.12 -2.15 41.12 -4 44 C -3.36 47.17 -3.36 47.17 -2.12 50.56 C 0 56.87 0 56.87 0 59 C 1.73 59.28 1.73 59.28 3.5 59.56 C 9.8 61.13 13.87 65.46 17.94 70.31 C 20.68 77.24 20.42 83.74 18.03 90.73 C 16.49 94.14 14.68 96.39 12 99 C 11.34 99 10.68 99 10 99 C 10.05 99.89 10.09 100.79 10.14 101.71 C 10.38 109.58 10.13 116.14 6 123 C 1.84 127.38 -2.63 128.79 -8.56 129.31 C -12.4 128.96 -14.09 128.51 -17 126 C -19.26 122.13 -20.23 120.13 -19.31 115.69 C -18 113 -18 113 -16 111 C -13.06 110.62 -13.06 110.62 -10 111 C -7.53 113.22 -7.04 114.44 -6.81 117.75 C -6.87 118.49 -6.94 119.24 -7 120 C -4.54 119.5 -4.54 119.5 -2 118 C 0.77 113.05 1.51 108.61 2 103 C 1.5 103.16 1 103.32 0.48 103.49 C -8.62 105.37 -20.87 105.3 -29.14 100.85 C -35.47 96.61 -39.5 90.49 -41 83 C -41.88 72.84 -37.88 65.49 -31.59 57.74 C -29.53 55.56 -27.53 53.74 -25.23 51.86 C -18.25 46.5 -18.25 46.5 -14.76 38.89 C -15.24 34.36 -16.79 30.18 -18.36 25.93 C -20.28 20.11 -19.8 14.1 -17.31 8.56 C -13.26 1.52 -7.9 -0.79 0 0 Z M -8.12 9.81 C -11.25 13.45 -11.26 16.8 -11.23 21.37 C -10.82 26.07 -9.41 30.51 -8 35 C -2.83 30.19 1.19 23.92 1.56 16.69 C 0.93 12.56 0.06 10.8 -3 8 C -6.09 7.68 -6.09 7.68 -8.12 9.81 Z M -21.26 58.81 C -26.95 64.66 -32.74 70.89 -33.11 79.5 C -32.25 85.1 -29.29 89.38 -25 93 C -17.5 96.75 -8.07 96.41 0 95 C 1.42 92.16 0.57 90.61 -0.21 87.55 C -0.49 86.48 -0.76 85.4 -1.04 84.29 C -1.34 83.17 -1.63 82.04 -1.94 80.88 C -2.23 79.74 -2.52 78.6 -2.82 77.43 C -3.54 74.62 -4.27 71.81 -5 69 C -6.32 69 -7.64 69 -9 69 C -11.4 73.65 -11.2 77.91 -11 83 C -11.99 83 -12.98 83 -14 83 C -16.63 78.43 -16.67 74.15 -16 69 C -13.92 64.99 -11.3 62.06 -8 59 C -9.49 54.55 -9.49 54.55 -11 50 C -14.3 50 -19.02 56.59 -21.26 58.81 Z M 3 68 C 4.31 75.11 6.02 82.05 8 89 C 11.09 86.32 11.64 84.1 12 79.99 C 12 75.58 10.37 73.42 7.5 70.19 C 5.3 67.78 5.3 67.78 3 68 Z");
+    fill="#37474F"/;
+    transform: translate(174, 156);}>
+            </g>`;
+
+        case 'bass':
+          return `
+            <g transform="translate(30, 38) scale(0.72)">
+              <path d="M 10 16 C 10 10 23 8 26 22 C 28 30 16 42 12 61" fill="none" stroke="#37474F" stroke-width="5.5" stroke-linecap="round"/>
+              <circle cx="13" cy="18" r="5.5" fill="#37474F"/>
+              <circle cx="36" cy="12" r="3.8" fill="#37474F"/>
+              <circle cx="36" cy="28" r="3.8" fill="#37474F"/>
+            </g>`;
+
+        case 'alto':
+          return `
+            <!-- 將 Y 軸平移從 40 調整為 28，使中音譜號整體往上提升 12px -->
+            <g transform="translate(30, 28) scale(0.65)">
+              <line x1="12" y1="20" x2="12" y2="90" stroke="#37474F" stroke-width="6"/>
+              <line x1="20" y1="20" x2="20" y2="90" stroke="#37474F" stroke-width="2.5"/>
+              <path d="M 24 18 C 45 23 50 42 35 55 C 50 68 45 89 28 89" fill="none" stroke="#37474F" stroke-width="4.5"/>
+              <path d="M 32 55 L 42 55" stroke="#37474F" stroke-width="4"/>
+            </g>`;
+
+        case 'tenor':
+          return `
+            <g transform="translate(30, 25) scale(0.65)">
+              <line x1="10" y1="10" x2="10" y2="80" stroke="#37474F" stroke-width="6"/>
+              <line x1="18" y1="10" x2="18" y2="80" stroke="#37474F" stroke-width="2.5"/>
+              <path d="M 18 12 C 35 12 40 32 25 45 C 40 58 35 78 18 78" fill="none" stroke="#37474F" stroke-width="4.5"/>
+              <path d="M 22 43 L 32 43" stroke="#37474F" stroke-width="4"/>
+            </g>`;
+
+        default:
+          return '';
+      }
+    }
+
+    function getAccidentalPositions(clef, sigType) {
+      if (sigType === 'sharps') {
+        switch (clef) {
+          case 'treble':
+            return [44, 62, 38, 56, 74, 50, 68]; // F5, C5, G5, D5, A4, E5, B4
+          case 'bass':
+            return [54, 72, 48, 66, 84, 60, 78]; // F3, C3, G3, D3, A2, E3, B2
+          case 'alto':
+            return [49, 67, 43, 61, 79, 55, 73]; // F4, C4, G4, D4, A3, E4, B3
+          case 'tenor':
+            return [80, 54, 72, 48, 66, 42, 60]; // F3, C4, G3, D4, A3, E4, B3
+        }
+      } else {
+        switch (clef) {
+          case 'treble':
+            return [66, 48, 72, 54, 78, 60, 84]; // Bb4, Eb5, Ab4, Db5, Gb4, Cb5, Fb4
+          case 'bass':
+            return [78, 60, 84, 66, 90, 72, 96]; // Bb2, Eb3, Ab2, Db3, Gb2, Cb3, Fb2
+          case 'alto':
+            return [72, 54, 78, 60, 86, 66, 92]; // Bb3, Eb4, Ab3, Db4, Gb3, Cb4, Fb3
+          case 'tenor':
+            return [60, 42, 66, 48, 74, 54, 80]; // Bb3, Eb4, Ab3, Db4, Gb3, Cb4, Fb3
+        }
+      }
+      return [];
+    }
+
+    function renderStaffSVG(keyObj, clef) {
+      const svg = document.getElementById('staff-svg');
+      if (!svg) return;
+
+      // 5 Staff lines (Y: 40, 52, 64, 76, 88)
+      let svgContent = `
+        <rect width="100%" height="100%" fill="#FFFFFF" rx="16"/>
+        <line x1="20" y1="40" x2="320" y2="40" class="staff-line"/>
+        <line x1="20" y1="52" x2="320" y2="52" class="staff-line"/>
+        <line x1="20" y1="64" x2="320" y2="64" class="staff-line"/>
+        <line x1="20" y1="76" x2="320" y2="76" class="staff-line"/>
+        <line x1="20" y1="88" x2="320" y2="88" class="staff-line"/>
+        
+        <!-- Double Barline at right -->
+        <line x1="310" y1="40" x2="310" y2="88" stroke="#37474F" stroke-width="2"/>
+        <line x1="316" y1="40" x2="316" y2="88" stroke="#37474F" stroke-width="4"/>
+      `;
+
+      // Render Clef
+      svgContent += getClefSVGVector(clef);
+
+      // Render Key Signature Accidentals
+      const positions = getAccidentalPositions(clef, keyObj.sigType);
+      const count = keyObj.keySigCount;
+      const startX = 105;
+      const stepX = 24;
+
+      for (let i = 0; i < count; i++) {
+        const x = startX + (i * stepX);
+        const y = positions[i];
+
+        if (keyObj.sigType === 'sharps') {
+          // Sharp (♯) SVG path
+          svgContent += `
+            <g transform="translate(${x - 7}, ${y - 14}) scale(0.85)">
+              <line x1="5" y1="2" x2="5" y2="28" stroke="#1E293B" stroke-width="2.2"/>
+              <line x1="12" y1="0" x2="12" y2="26" stroke="#1E293B" stroke-width="2.2"/>
+              <line x1="1" y1="18" x2="16" y2="12" stroke="#1E293B" stroke-width="4"/>
+              <line x1="1" y1="12" x2="16" y2="6" stroke="#1E293B" stroke-width="4"/>
+            </g>`;
+        } else {
+          // Flat (♭) SVG path
+          svgContent += `
+            <g transform="translate(${x - 6}, ${y - 18}) scale(0.85)">
+              <line x1="3" y1="2" x2="3" y2="26" stroke="#1E293B" stroke-width="2.5"/>
+              <path d="M 3 14 C 8 10, 14 16, 3 24 Z" fill="#1E293B"/>
+            </g>`;
+        }
+      }
+
+      svg.innerHTML = svgContent;
+    }
+
+    /* ==========================================================================
+       4. INTERACTIVE PIANO KEYBOARD HELPER RULER
+       ========================================================================== */
+    const PIANO_KEYS_DATA = [
+      { name: "C3", isBlack: false, freq: 130.81 },
+      { name: "C#3", isBlack: true, freq: 138.59 },
+      { name: "D3", isBlack: false, freq: 146.83 },
+      { name: "D#3", isBlack: true, freq: 155.56 },
+      { name: "E3", isBlack: false, freq: 164.81 },
+      { name: "F3", isBlack: false, freq: 174.61 },
+      { name: "F#3", isBlack: true, freq: 185.00 },
+      { name: "G3", isBlack: false, freq: 196.00 },
+      { name: "G#3", isBlack: true, freq: 207.65 },
+      { name: "A3", isBlack: false, freq: 220.00 },
+      { name: "A#3", isBlack: true, freq: 233.08 },
+      { name: "B3", isBlack: false, freq: 246.94 },
+      { name: "C4", isBlack: false, freq: 261.63 },
+      { name: "C#4", isBlack: true, freq: 277.18 },
+      { name: "D4", isBlack: false, freq: 293.66 },
+      { name: "D#4", isBlack: true, freq: 311.13 },
+      { name: "E4", isBlack: false, freq: 329.63 },
+      { name: "F4", isBlack: false, freq: 349.23 },
+      { name: "F#4", isBlack: true, freq: 369.99 },
+      { name: "G4", isBlack: false, freq: 392.00 },
+      { name: "G#4", isBlack: true, freq: 415.30 },
+      { name: "A4", isBlack: false, freq: 440.00 },
+      { name: "A#4", isBlack: true, freq: 466.16 },
+      { name: "B4", isBlack: false, freq: 493.88 }
+    ];
+
+    let selectedPianoKeyIndices = [];
+
+    function renderPianoKeyboard() {
+      const container = document.getElementById('piano-keyboard-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+
+      const keyWrapper = document.createElement('div');
+      keyWrapper.className = "relative flex h-24 select-none px-2";
+
+      PIANO_KEYS_DATA.forEach((key, index) => {
+        if (!key.isBlack) {
+          const wKey = document.createElement('div');
+          const isSelected = selectedPianoKeyIndices.includes(index);
+          wKey.className = `piano-key-white w-7 sm:w-8 h-24 border border-slate-300 rounded-b-md flex items-end justify-center pb-1 text-[10px] text-slate-400 font-bold shadow-sm ${isSelected ? 'active' : ''}`;
+          wKey.onclick = () => onPianoKeyClick(index);
+          keyWrapper.appendChild(wKey);
+        } else {
+          // Black keys overlay relative positioning
+          const bKey = document.createElement('div');
+          const isSelected = selectedPianoKeyIndices.includes(index);
+          bKey.className = `piano-key-black w-4 sm:w-5 h-14 rounded-b-md z-10 -mx-2 sm:-mx-2.5 ${isSelected ? 'active' : ''}`;
+          bKey.onclick = (e) => {
+            e.stopPropagation();
+            onPianoKeyClick(index);
+          };
+          keyWrapper.appendChild(bKey);
+        }
+      });
+
+      container.appendChild(keyWrapper);
+    }
+
+    function onPianoKeyClick(index) {
+      const key = PIANO_KEYS_DATA[index];
+      playPianoPitch(key.freq);
+
+      if (selectedPianoKeyIndices.length >= 2) {
+        selectedPianoKeyIndices = [index];
+      } else {
+        if (!selectedPianoKeyIndices.includes(index)) {
+          selectedPianoKeyIndices.push(index);
+        }
+      }
+
+      selectedPianoKeyIndices.sort((a, b) => a - b);
+      renderPianoKeyboard();
+      updatePianoInfoBar();
+    }
+
+    function updatePianoInfoBar() {
+      const infoEl = document.getElementById('piano-selected-keys');
+      if (!infoEl) return;
+
+      if (selectedPianoKeyIndices.length === 0) {
+        infoEl.textContent = state.lang === 'zh' ? '按壓琴鍵即可聆聽真實鋼琴音高' : 'Tap keys to hear acoustic piano pitch';
+      } else if (selectedPianoKeyIndices.length === 1) {
+        infoEl.textContent = state.lang === 'zh' ? `已選擇第 1 個琴鍵，請點選第 2 個琴鍵來計算半音` : `Selected 1st key. Tap a 2nd key to calculate semitones.`;
+      } else if (selectedPianoKeyIndices.length === 2) {
+        const diff = Math.abs(selectedPianoKeyIndices[1] - selectedPianoKeyIndices[0]);
+        infoEl.textContent = state.lang === 'zh' 
+          ? `距離：${diff} 個半音 (Semitones) | 相差 ${diff} 個琴鍵步驟`
+          : `Distance: ${diff} Semitone(s) | Difference of ${diff} step(s)`;
+      }
+    }
+
+    function togglePianoDrawer() {
+      const drawer = document.getElementById('piano-drawer');
+      const arrow = document.getElementById('piano-drawer-arrow');
+      if (drawer.classList.contains('hidden')) {
+        drawer.classList.remove('hidden');
+        if (arrow) arrow.textContent = '▲';
+        renderPianoKeyboard();
+      } else {
+        drawer.classList.add('hidden');
+        if (arrow) arrow.textContent = '▼';
+      }
+    }
+
+    /* ==========================================================================
+       5. GAME FLOW & QUESTION ENGINE
+       ========================================================================== */
+    function getAvailableKeys() {
+      return KEY_DATABASE.filter(k => k.grade <= state.grade);
+    }
+
+    /* Helper function to get localized key signature notes */
+    function getFormattedNotes(keyObj) {
+      if (keyObj.keySigCount === 0 || keyObj.notes.includes("無升降號")) {
+        return state.lang === 'zh' ? "無升降號" : "No Accidentals";
+      }
+      return keyObj.notes;
+    }
+
+    function generateQuestion() {
+      const pool = getAvailableKeys();
+      if (pool.length === 0) return;
+
+      // Pick a random target key signature
+      const targetKey = pool[Math.floor(Math.random() * pool.length)];
+
+      // Pick allowed clefs according to the selected ABRSM grade level:
+      // Grade 1-3: Treble & Bass only; Grade 4: Treble, Bass, & Alto; Grade 5: All clefs (+ Tenor)
+      let allowedClefs = ['treble', 'bass'];
+      if (state.grade === 4) {
+        allowedClefs = ['treble', 'bass', 'alto'];
+      } else if (state.grade >= 5) {
+        allowedClefs = ['treble', 'bass', 'alto', 'tenor'];
+      }
+      const chosenClef = allowedClefs[Math.floor(Math.random() * allowedClefs.length)];
+
+      state.currentQuestion = targetKey;
+      state.selectedClef = chosenClef;
+
+      // Update UI elements
+      setTxt('lbl-question-count', `${state.lang === 'zh' ? '題目' : 'Q'} ${state.questionIndex + 1} / ${state.maxQuestions}`);
+      
+      // Mode 2 & Mode 3: Hide clef badge info as it's not needed without staff
+      const clefInfoEl = document.getElementById('lbl-clef-info');
+      if (clefInfoEl) {
+        if (state.mode === 1) {
+          clefInfoEl.classList.remove('hidden');
+          clefInfoEl.textContent = chosenClef.toUpperCase() + ' CLEF';
+        } else {
+          clefInfoEl.classList.add('hidden');
+        }
+      }
+
+      const modePrompts = {
+        1: state.lang === 'zh' 
+          ? `請觀察五線譜上的調號，請問這是哪一個【${targetKey.type === 'major' ? '大調 Major' : '小調 Minor'}】？` 
+          : `Which ${targetKey.type === 'major' ? 'Major' : 'Minor'} key corresponds to this key signature?`,
+        2: I18N[state.lang].promptMode2,
+        3: I18N[state.lang].promptMode3
+      };
+      setTxt('examiner-speech', modePrompts[state.mode]);
+
+      const presentationBox = document.getElementById('staff-container');
+      const textQContainer = document.getElementById('text-question-container');
+
+      if (state.mode === 1) {
+        // Staff visible, text hidden
+        presentationBox.classList.remove('hidden');
+        textQContainer.classList.add('hidden');
+        renderStaffSVG(targetKey, chosenClef);
+      } else if (state.mode === 2) {
+        // Key name visible, staff hidden
+        presentationBox.classList.add('hidden');
+        textQContainer.classList.remove('hidden');
+        setTxt('text-question-title', targetKey.name);
+        setTxt('text-question-sub', state.lang === 'zh' ? '請找出擁有正確升降號的答案' : 'Choose the correct key signature');
+      } else if (state.mode === 3) {
+        // Mode 3: Relative Major <-> Relative Minor
+        presentationBox.classList.add('hidden');
+        textQContainer.classList.remove('hidden');
+        
+        setTxt('text-question-title', targetKey.name);
+        
+        const isAskingMinor = targetKey.type === 'major';
+        if (isAskingMinor) {
+          setTxt('text-question-sub', state.lang === 'zh' ? '請找出相對應的關係小調 (Relative Minor)' : 'Find the corresponding Relative Minor');
+          setTxt('examiner-speech', state.lang === 'zh' ? '請幫忙貓爸爸Major找小孩。' : 'Find the Relative Minor for this Major key!');
+        } else {
+          setTxt('text-question-sub', state.lang === 'zh' ? '請找出相對應的關係大調 (Relative Major)' : 'Find the corresponding Relative Major');
+          setTxt('examiner-speech', state.lang === 'zh' ? '請幫忙小貓Minor找爸爸。' : 'Find the Relative Major for this Minor key.');
+        }
+      }
+
+      renderOptions(targetKey);
+    }
+
+    function renderOptions(targetKey) {
+      const optionsGrid = document.getElementById('options-grid');
+      optionsGrid.innerHTML = '';
+
+      let choices = [];
+      const pool = getAvailableKeys();
+
+      if (state.mode === 1) {
+        // Mode 1: Answer is Key Name (e.g. "D Major" or "B minor")
+        const correctAnswer = targetKey.name;
+        choices.push(correctAnswer);
+
+        // Filter the pool to ONLY include keys of the SAME type (Major or Minor)
+        const sameTypePool = pool.filter(k => k.type === targetKey.type && k.name !== correctAnswer);
+
+        // 1) Neighboring keys distractor (+/- 1 accidental of same type)
+        const neighborKeys = sameTypePool.filter(k => Math.abs(k.keySigCount - targetKey.keySigCount) === 1 && k.sigType === targetKey.sigType);
+        
+        neighborKeys.forEach(nk => {
+          if (choices.length < 4 && !choices.includes(nk.name)) {
+            choices.push(nk.name);
+          }
+        });
+
+        // 2) Opposite accidental type distractor (e.g. 1 sharp vs 1 flat) of the SAME type (Major/Minor)
+        const oppositeSigKeys = sameTypePool.filter(k => k.keySigCount === targetKey.keySigCount && k.sigType !== targetKey.sigType);
+        oppositeSigKeys.forEach(ok => {
+          if (choices.length < 4 && !choices.includes(ok.name)) {
+            choices.push(ok.name);
+          }
+        });
+
+        // 3) Fill remaining slots randomly from the same-type pool
+        const remainingPool = sameTypePool.map(k => k.name).filter(n => !choices.includes(n));
+        shuffleArray(remainingPool);
+        while (choices.length < 4 && remainingPool.length > 0) {
+          choices.push(remainingPool.pop());
+        }
+
+        shuffleArray(choices);
+
+        choices.forEach(ans => {
+          const btn = document.createElement('button');
+          btn.className = 'btn-macaron bg-amber-50 hover:bg-amber-100 text-amber-950 font-bold py-3.5 px-4 rounded-2xl border-2 border-amber-200 text-sm sm:text-base shadow-sm text-center';
+          btn.textContent = ans;
+          btn.onclick = () => handleAnswer(ans === correctAnswer, btn);
+          optionsGrid.appendChild(btn);
+        });
+
+      } else if (state.mode === 2) {
+        // Mode 2: Answer is Accidentals List (e.g., "F#, C#" or "No Accidentals")
+        const correctAnswer = getFormattedNotes(targetKey);
+        choices.push(correctAnswer);
+
+        const distractors = pool.map(k => getFormattedNotes(k)).filter(n => n !== correctAnswer);
+        shuffleArray(distractors);
+
+        while (choices.length < 4 && distractors.length > 0) {
+          const item = distractors.pop();
+          if (!choices.includes(item)) choices.push(item);
+        }
+
+        shuffleArray(choices);
+
+        choices.forEach(ans => {
+          const btn = document.createElement('button');
+          btn.className = 'btn-macaron bg-sky-50 hover:bg-sky-100 text-sky-950 font-bold py-3.5 px-4 rounded-2xl border-2 border-sky-200 text-sm sm:text-base shadow-sm text-center';
+          btn.textContent = ans;
+          btn.onclick = () => handleAnswer(ans === correctAnswer, btn);
+          optionsGrid.appendChild(btn);
+        });
+
+      } else if (state.mode === 3) {
+        // Mode 3: Relative Major / Relative Minor
+        const correctAnswer = targetKey.relative;
+        const isAskingMinor = targetKey.type === 'major';
+        
+        choices.push(correctAnswer);
+
+        // Candidate distractors: matching type (all minor keys or all major keys)
+        const candidateDistractors = pool.map(k => isAskingMinor ? (k.type === 'minor' ? k.name : k.relative) : (k.type === 'major' ? k.name : k.relative));
+        const distractors = candidateDistractors.filter(r => r !== correctAnswer && r);
+        shuffleArray(distractors);
+
+        while (choices.length < 4 && distractors.length > 0) {
+          const item = distractors.pop();
+          if (!choices.includes(item)) choices.push(item);
+        }
+
+        shuffleArray(choices);
+
+        choices.forEach(ans => {
+          const btn = document.createElement('button');
+          btn.className = 'btn-macaron bg-pink-50 hover:bg-pink-100 text-pink-950 font-bold py-3.5 px-4 rounded-2xl border-2 border-pink-200 text-sm sm:text-base shadow-sm text-center';
+          btn.textContent = ans;
+          btn.onclick = () => handleAnswer(ans === correctAnswer, btn);
+          optionsGrid.appendChild(btn);
+        });
+      }
+    }
+
+    function handleAnswer(isCorrect, buttonEl) {
+      // Disable all option buttons temporarily
+      const allBtns = document.querySelectorAll('#options-grid button');
+      allBtns.forEach(b => b.disabled = true);
+
+      if (isCorrect) {
+        playSound('correct');
+        buttonEl.classList.remove('bg-amber-50', 'bg-sky-50', 'bg-pink-50');
+        buttonEl.classList.add('bg-emerald-400', 'text-white', 'border-emerald-500');
+        state.score += 10;
+        state.fish += 1;
+        setTxt('lbl-score', `${state.lang === 'zh' ? '得分' : 'Score'}: ${state.score}`);
+        updateCurrencyDisplay();
+        setTxt('examiner-speech', state.lang === 'zh' ? '🎉 太棒了！答對囉，獲得 1 條小魚干！' : '🎉 Excellent! Correct! Earned 1 Fish!');
+      } else {
+        playSound('wrong');
+        buttonEl.classList.remove('bg-amber-50', 'bg-sky-50', 'bg-pink-50');
+        buttonEl.classList.add('bg-rose-400', 'text-white', 'border-rose-500');
+        setTxt('examiner-speech', state.lang === 'zh' ? '喵嗚～沒關係，下次再接再厲！' : 'Meow~ Keep trying!');
+      }
+
+      setTimeout(() => {
+        state.questionIndex++;
+        if (state.questionIndex < state.maxQuestions) {
+          generateQuestion();
+        } else {
+          endGameRound();
+        }
+      }, 1200);
+    }
+
+    function endGameRound() {
+      // 每一題 10 分，10 題全對總分為 maxQuestions * 10 (100分)
+      let fishEarned = Math.floor(state.score / 10);
+      let isPerfect = (state.score === state.maxQuestions * 10);
+      let cansEarned = isPerfect ? 1 : 0; // 只有 10 題全對才會獲得金罐頭
+
+      state.cans += cansEarned;
+      updateCurrencyDisplay();
+
+      setTxt('summary-title', state.lang === 'zh' ? `恭喜 ${state.playerName} 闖關完成！` : `Congratulations ${state.playerName}!`);
+      setTxt('summary-score', `${state.score / 10} / ${state.maxQuestions}`);
+      setTxt('summary-rewards', `🐟 +${fishEarned} 🥫 +${cansEarned}`);
+
+      // 根據是否 10 題全對顯示對應結算提示
+      const summaryMsg = document.getElementById('summary-msg');
+      if (summaryMsg) {
+        if (isPerfect) {
+          summaryMsg.textContent = state.lang === 'zh' 
+            ? '🎉 太厲害了！10 題全對，順利拿到 1 個金罐頭！🥫' 
+            : '🎉 Perfect 10/10! You earned 1 Golden Can! 🥫';
+        } else {
+          summaryMsg.textContent = state.lang === 'zh' 
+            ? '表現不錯！需要 10 題全對才能拿到金罐頭喔，再接再厲！' 
+            : 'Great effort! You need a perfect 10/10 score to earn a Golden Can. Keep trying!';
+        }
+      }
+
+      const summaryModal = document.getElementById('modal-summary');
+      if (summaryModal) summaryModal.classList.remove('hidden');
+    }
+
+    function startGameWithPlayerName() {
+      const input = document.getElementById('player-name-input');
+      if (input && input.value.trim() !== '') {
+        state.playerName = input.value.trim();
+      } else {
+        state.playerName = state.lang === 'zh' ? '小喵樂手' : 'Little Kitten';
+      }
+
+      setTxt('display-player-name', state.playerName);
+
+      const welcomeScreen = document.getElementById('welcome-screen');
+      if (welcomeScreen) {
+        welcomeScreen.classList.add('hidden');
+      }
+
+      getAudioContext();
+    }
+
+    function restartGameRound() {
+      const summaryModal = document.getElementById('modal-summary');
+      if (summaryModal) summaryModal.classList.add('hidden');
+
+      state.questionIndex = 0;
+      state.score = 0;
+      setTxt('lbl-score', `${state.lang === 'zh' ? '得分' : 'Score'}: 0`);
+      generateQuestion();
+    }
+
+    /* ==========================================================================
+       6. GRADE & MODE SWITCHING
+       ========================================================================== */
+    function renderGradeButtons() {
+      const container = document.getElementById('grade-buttons-container');
+      if (!container) return;
+
+      container.innerHTML = '';
+      [1, 2, 3, 4, 5].forEach(g => {
+        const btn = document.createElement('button');
+        const isActive = state.grade === g;
+        btn.className = `btn-macaron px-3 py-1 rounded-xl text-xs sm:text-sm font-bold border ${isActive ? 'bg-amber-400 text-amber-950 border-amber-500 shadow' : 'bg-white text-slate-600 hover:bg-amber-50 border-slate-200'}`;
+        btn.textContent = `Grade ${g}`;
+        btn.onclick = () => {
+          state.grade = g;
+          renderGradeButtons();
+          restartGameRound();
+        };
+        container.appendChild(btn);
+      });
+    }
+
+    function changeMode(modeNum) {
+      state.mode = modeNum;
+
+      [1, 2, 3].forEach(m => {
+        const btn = document.getElementById(`btn-mode-${m}`);
+        if (btn) {
+          if (m === modeNum) {
+            btn.className = "btn-macaron py-2 px-2 sm:px-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-amber-900 bg-white shadow-sm border border-amber-200";
+          } else {
+            btn.className = "btn-macaron py-2 px-2 sm:px-3 rounded-xl font-bold text-xs sm:text-sm transition-all text-amber-800 hover:bg-white/60";
+          }
+        }
+      });
+
+      restartGameRound();
+    }
+
+    /* ==========================================================================
+       7. GALLERY & CAT UNLOCK SYSTEM
+       ========================================================================== */
+    function openGallery() {
+      setTxt('gallery-title', I18N[state.lang].galleryTitle);
+      setTxt('btn-close-gallery', I18N[state.lang].closeBtn);
+      renderGalleryGrid();
+      const modal = document.getElementById('modal-gallery');
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeGallery() {
+      const modal = document.getElementById('modal-gallery');
+      if (modal) modal.classList.add('hidden');
+    }
+
+    function renderGalleryGrid() {
+      const grid = document.getElementById('gallery-grid');
+      if (!grid) return;
+
+      grid.innerHTML = '';
+
+      GALLERY_CATS.forEach(cat => {
+        const isUnlocked = state.unlockedCats.includes(cat.id);
+        const isEquipped = state.equippedCat === cat.id;
+        const catDisplayName = state.lang === 'zh' ? cat.name : cat.nameEn;
+
+        const card = document.createElement('div');
+        card.className = `p-3 rounded-2xl border-2 flex flex-col items-center justify-between gap-2 text-center ${isEquipped ? 'bg-amber-100 border-amber-400' : isUnlocked ? 'bg-white border-slate-200' : 'bg-slate-50 border-slate-200 opacity-90'}`;
+
+        card.innerHTML = `
+          <img src="${cat.img}" onerror="this.onerror=null; this.src='https://placehold.co/100x100/ffe082/4a4238?text=Cat'" class="w-16 h-16 rounded-xl object-cover border-2 ${isEquipped ? 'border-amber-400' : 'border-slate-200'}">
+          <div>
+            <div class="font-bold text-xs sm:text-sm text-slate-800">${catDisplayName}</div>
+            ${!isUnlocked ? `<div class="text-[10px] text-amber-800 font-semibold mt-0.5">🐟 ${cat.costFish} | 🥫 ${cat.costCans}</div>` : ''}
+          </div>
+        `;
+
+        const actionBtn = document.createElement('button');
+        if (isEquipped) {
+          actionBtn.className = 'w-full py-1 text-xs font-bold bg-amber-400 text-amber-950 rounded-xl shadow-sm cursor-default';
+          actionBtn.textContent = I18N[state.lang].equipped;
+        } else if (isUnlocked) {
+          actionBtn.className = 'w-full py-1 text-xs font-bold bg-emerald-400 hover:bg-emerald-500 text-emerald-950 rounded-xl shadow-sm';
+          actionBtn.textContent = I18N[state.lang].equip;
+          actionBtn.onclick = () => equipCat(cat.id);
+        } else {
+          const canAfford = state.fish >= cat.costFish && state.cans >= cat.costCans;
+          actionBtn.className = `w-full py-1 text-xs font-bold rounded-xl shadow-sm ${canAfford ? 'bg-sky-400 hover:bg-sky-500 text-sky-950' : 'bg-slate-200 text-slate-400 cursor-not-allowed'}`;
+          actionBtn.textContent = I18N[state.lang].unlock;
+          actionBtn.onclick = () => unlockCat(cat);
+        }
+
+        card.appendChild(actionBtn);
+        grid.appendChild(card);
+      });
+    }
+
+    function unlockCat(cat) {
+      if (state.fish >= cat.costFish && state.cans >= cat.costCans) {
+        state.fish -= cat.costFish;
+        state.cans -= cat.costCans;
+        state.unlockedCats.push(cat.id);
+        equipCat(cat.id);
+        updateCurrencyDisplay();
+        renderGalleryGrid();
+      }
+    }
+
+    function equipCat(catId) {
+      state.equippedCat = catId;
+      const catObj = GALLERY_CATS.find(c => c.id === catId);
+      if (catObj) {
+        // Keep header banner logo fixed to Mozart Cat, only update question & summary avatars
+        const questionImg = document.getElementById('question-cat-avatar');
+        const summaryImg = document.getElementById('summary-cat-avatar');
+
+        if (questionImg) questionImg.src = catObj.img;
+        if (summaryImg) summaryImg.src = catObj.img;
+      }
+      renderGalleryGrid();
+    }
+
+    function updateCurrencyDisplay() {
+      setTxt('count-fish', state.fish);
+      setTxt('count-cans', state.cans);
+    }
+
+    /* ==========================================================================
+       8. MULTILINGUAL SWITCHER & HELPER UTILITIES
+       ========================================================================== */
+    function toggleLanguage() {
+      state.lang = state.lang === 'zh' ? 'en' : 'zh';
+      setTxt('txt-lang-btn', state.lang === 'zh' ? 'EN' : '中文');
+
+      const dict = I18N[state.lang];
+      setTxt('ui-title', dict.title);
+      setTxt('ui-subtitle', dict.subtitle);
+      setTxt('ui-select-grade', dict.selectGrade);
+      setTxt('ui-mode1', dict.mode1);
+      setTxt('ui-mode2', dict.mode2);
+      setTxt('ui-mode3', dict.mode3);
+      setTxt('ui-gallery-btn', dict.galleryBtn);
+      setTxt('txt-piano-toggle', dict.pianoToggle);
+      setTxt('txt-piano-hint', dict.pianoHint);
+      setTxt('gallery-title', dict.galleryTitle);
+      setTxt('btn-close-gallery', dict.closeBtn);
+
+      if (!document.getElementById('modal-gallery').classList.contains('hidden')) {
+        renderGalleryGrid();
+      }
+
+      updatePianoInfoBar();
+      generateQuestion();
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+    }
+
+    /* ==========================================================================
+       9. INITIALIZATION
+       ========================================================================== */
+    window.onload = function () {
+      renderGradeButtons();
+      updateCurrencyDisplay();
+      equipCat(state.equippedCat);
+      generateQuestion();
+    };
+  </script>
+</body>
+</html>
