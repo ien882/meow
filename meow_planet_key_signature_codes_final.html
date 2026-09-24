@@ -829,7 +829,7 @@
 
       const modePrompts = {
         1: state.lang === 'zh' 
-          ? `請觀察五線譜上的調號。這是哪一個 ${targetKey.type === 'major' ? '大調 Major' : '小調 Minor'} 的調號呢？` 
+          ? `請觀察五線譜上的調號。這是哪一個${targetKey.type === 'major' ? '大調 Major' : '小調 Minor'}的調號呢？` 
           : `Which ${targetKey.type === 'major' ? 'Major' : 'Minor'} key corresponds to this key signature?`,
         2: I18N[state.lang].promptMode2,
         3: I18N[state.lang].promptMode3
